@@ -12,16 +12,49 @@ class TwitterMega
 	end
 
 	def initialize
-		puts "ciao"
+		puts "this wonderful application will give you infinite knowledge \n(in the form of the latest tweets mentioning a certain user)\n"
+		
+		# all the choices are made here
+		menu
+
+		
+		print_results(mentionings(@user))
 	end
 
+	def menu
+		puts "\nplease enter the user you are interested in (or press q to quit)"
+		puts "(blank is @esa)"
+		@user = gets.chomp
+		case @user
+		when "q" then exit
+		when ""  then @user = "esa"				# default user is @esa
+		end
+
+		puts "select how many results you want"
+		puts "please keep it low or I will get banned from the free Twitter API"
+		@results_size = gets.chomp
+		while @results_size.to_i > 50
+			puts "\ncome on, choose a smaller number please"
+			@results_size = gets.chomp
+		end
+	end
+	
+	# this method is not used, it was just to check the API
+	# RSpec is still using it to make sure the app can talk to the API
 	def tweet_fetch(user)
 		@@client.user_timeline(user)
 	end
 
+
+	# main method
 	def mentionings(user)
-		puts "asking twitter for mentionings of #{user}...it may take a while"
-		mentionings = @@client.search("@#{user}", options = { count: 100 })
+		puts "asking twitter for mentionings of @#{user}...it may take a while"
+
+		# this returns a potentially VERY long result list that also has the user's own tweets
+		# please don't use EACH on it or it will return VERY long results
+		mentionings = @@client.search("@#{user}") # in a far future, the options hash may be necessary    #, options = { count: 100 })
+		
+		# this removes the retweets
 		clean_up_mentionings(mentionings)
 	end
 
@@ -29,17 +62,28 @@ class TwitterMega
 		cleaned_mentionings = []
 		mentionings.each do |mentioning|
 			break if cleaned_mentionings.length > 10
-			cleaned_mentionings << mentioning if mentioning.text[0..6] != "RT @esa"
+			next if mentioning.text[0..6] == "RT @esa"	# removes retweets
+			next if mentioning.text[0..3] == "@esa"			# removes own tweets
+			cleaned_mentionings << mentioning 
 		end
 		return cleaned_mentionings
 	end
+
+	def print_results(results)
+		results.each_with_index do |result, i|
+			puts "\n##{i}"
+			puts result.text
+		end
+	end
 end
 
-TwitterMega.new.mentionings("esa").each_with_index do |result, i|
-	puts "#{i}"
-	puts result.text
+TwitterMega.new
+
+# TwitterMega.new.mentionings("esa").each_with_index do |result, i|
+# 	puts "#{i}"
+# 	puts result.text
 	 
-end
+# end
 
 
 
