@@ -10,9 +10,35 @@ class TwitterMega
 		config.access_token					=	"770927087934996480-o7yhhEBsBPi6FNDGdVKhIHBOkAgLmlb"
 		config.access_token_secret	= "FsE2XlnwOorLMQp67PPdqm2behxmLS0SR5PqmKlpNrHn1"
 	end
+
+	def initialize
+		puts "ciao"
+	end
+
 	def tweet_fetch(user)
 		@@client.user_timeline(user)
 	end
+
+	def mentionings(user)
+		puts "asking twitter for mentionings of #{user}...it may take a while"
+		mentionings = @@client.search("@#{user}", options = { count: 100 })
+		clean_up_mentionings(mentionings)
+	end
+
+	def clean_up_mentionings(mentionings)
+		cleaned_mentionings = []
+		mentionings.each do |mentioning|
+			break if cleaned_mentionings.length > 10
+			cleaned_mentionings << mentioning if mentioning.text[0..6] != "RT @esa"
+		end
+		return cleaned_mentionings
+	end
+end
+
+TwitterMega.new.mentionings("esa").each_with_index do |result, i|
+	puts "#{i}"
+	puts result.text
+	 
 end
 
 
