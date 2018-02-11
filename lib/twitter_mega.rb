@@ -13,7 +13,7 @@ class TwitterMega
 			# twitter_settings.rb is reading all the keys from the file
 		config   = TwitterConfig.new.read_config
 			# configuration for the gem
-		@@client = Twitter::REST::Client.new(config)
+		@client = Twitter::REST::Client.new(config)
 
 			# all the user choices are made here, it's the interface
 		menu	
@@ -49,7 +49,7 @@ class TwitterMega
 		# this method is not used, it was just to check the API
 		# RSpec is still using it to make sure the app can talk to the API
 	def tweet_fetch(user)
-		@@client.user_timeline(user)
+		@client.user_timeline(user)
 	end
 
 
@@ -59,7 +59,7 @@ class TwitterMega
 
 		# this returns a potentially VERY long result list that also has the user's own tweets
 		# please don't use EACH on it or it will return VERY long results
-		@@client.search("@#{user}") # in a far future, the options hash may be necessary    #, options = { count: 100 })
+		@client.search("@#{user}") # in a far future, the options hash may be necessary    #, options = { count: 100 })
 	end
 
 		# sets the results quantity and removes retweets and own tweets
