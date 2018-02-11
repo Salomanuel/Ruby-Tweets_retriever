@@ -7,13 +7,18 @@ module TwitterSettings
 			if File.exists?('keys.dat')
 				puts "loading settings"
 			else
-				explanations 
-				settings = File.new('keys.dat', 'w')
-				get_config
-				write_config
+				create_config  # handles the creation of the config file, calling all the sub-methods
 			end
-
 		end
+			
+			# handles the creation of the config file, calling all the sub-methods
+		def create_config
+			explanations 
+				# asks the user for the keys
+			get_config
+			write_config
+		end
+
 
 		def explanations
 			puts "Twitter API v1.1 requires you to authenticate via OAuth, so you'll need to register your application with Twitter. (https://apps.twitter.com/) \nOnce you've registered an application, make sure to set the correct access level, otherwise you may see the error:"
@@ -38,12 +43,17 @@ module TwitterSettings
 		end
 
 		def write_config
+			File.new('keys.dat', 'w')
 			File.open("keys.dat", "w") do |f|
 				f.write(consumer_key: 			 @consumer_key,
 								consumer_secret: 		 @consumer_secret,
 								access_token:				 @access_token,
 								access_token_secret: @access_secret)
 			end
+		end
+
+		def read_config
+
 		end
 	end
 end
