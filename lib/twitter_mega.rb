@@ -1,18 +1,30 @@
 # documentation for this gem: https://github.com/sferik/twitter
-require 'twitter'
+require 					'twitter'
+require_relative 	'twitter_settings'
+include 					TwitterSettings
 
 
 class TwitterMega
-		# configuration for the gem
-	@@client = Twitter::REST::Client.new do |config|
-		config.consumer_key					=	"pjpFKcMYQpRKxHtlx7BOAl3VF"
-		config.consumer_secret			=	"0P97amDne0PGgL1AUK0pM9caHoeS8pK8ZpLHQUJptm6V0VVmdP"
-		config.access_token					=	"770927087934996480-o7yhhEBsBPi6FNDGdVKhIHBOkAgLmlb"
-		config.access_token_secret	= "FsE2XlnwOorLMQp67PPdqm2behxmLS0SR5PqmKlpNrHn1"
-	end
-
 	def initialize
+		puts "Welcome to Twitter Mega Ninja Tweet (retriever)\n"
 		puts "this wonderful application will give you infinite knowledge \n(in the form of the latest tweets mentioning a certain user)\n"
+
+
+			# twitter_settings.rb is reading all the keys from the file
+		config   = TwitterConfig.new.read_config
+			# configuration for the gem
+		@@client = Twitter::REST::Client.new(config)
+
+
+
+		# @@client = Twitter::REST::Client.new do |config|
+		# 	config.consumer_key					=	"pjpFKcMYQpRKxHtlx7BOAl3VF"
+		# 	config.consumer_secret			=	"0P97amDne0PGgL1AUK0pM9caHoeS8pK8ZpLHQUJptm6V0VVmdP"
+		# 	config.access_token					=	"770927087934996480-o7yhhEBsBPi6FNDGdVKhIHBOkAgLmlb"
+		# 	config.access_token_secret	= "FsE2XlnwOorLMQp67PPdqm2behxmLS0SR5PqmKlpNrHn1"
+		# end
+
+
 		
 			# all the user choices are made here, it's the interface
 		menu	
