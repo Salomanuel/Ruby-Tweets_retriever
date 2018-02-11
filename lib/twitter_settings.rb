@@ -7,6 +7,7 @@ module TwitterSettings
 		def initialize
 			if File.exists?('keys.dat')
 				puts "loading settings"
+				read_config
 			else
 				create_config  # handles the creation of the config file, calling all the sub-methods
 			end
@@ -50,8 +51,8 @@ module TwitterSettings
 		end
 
 		def read_config
-			File.open("keys.dat", "r") do |f|
-			end
+			@config = JSON.parse(File.read("keys.dat"))
+			puts @config
 		end
 	end
 end
