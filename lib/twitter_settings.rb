@@ -43,7 +43,6 @@ module TwitterSettings
 		end
 
 		def write_config
-			File.new('keys.dat', 'w')
 			File.open("keys.dat", "w") do |f|
 				f.write(consumer_key: 			 @consumer_key,
 								consumer_secret: 		 @consumer_secret,
