@@ -16,3 +16,4 @@ Twitter's Search API returns only tweets from the past 7 days. So if you want to
 	* of the settings
 * way more tests
 * encrypt settings
+* add rescues when the data doesn't work
