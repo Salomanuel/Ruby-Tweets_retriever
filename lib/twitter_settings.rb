@@ -46,7 +46,7 @@ module TwitterSettings
 		end
 
 		def write_config
-			File.open("keys.dat", "w") { |f|  f.write(@config) }
+			File.open("keys.dat", "w") { |f|  f.write(@config.to_json) }
 		end
 
 		def read_config
