@@ -2,6 +2,7 @@ module TwitterSettings
 	class TwitterConfig
 		require 'twitter'
 		require 'json'
+		# attr_reader :consumer_key, :consumer_secret, :access_token, :access_secret
 
 		def initialize
 			if File.exists?('keys.dat')
@@ -29,30 +30,28 @@ module TwitterSettings
 		end
 
 		def get_config
+			@config = {}
+
 			puts "\n\n"
 			puts "you will need 4 codes: consumer key, consumer secret, access token and access secret"
 			
 			puts "please write your CONSUMER KEY"
-			@consumer_key 		= gets.chomp
+			@config[:consumer_key] 		= gets.chomp
 			puts "please write your CONSUMER SECRET"
-			@consumer_secret 	= gets.chomp
+			@config[:consumer_secret] = gets.chomp
 			puts "please write your ACCESS TOKEN"
-			@access_token 		= gets.chomp
+			@config[:access_token] 		= gets.chomp
 			puts "please write your ACCESS SECRET"
-			@access_secret 		= gets.chomp
+			@config[:access_secret] 	= gets.chomp
 		end
 
 		def write_config
-			File.open("keys.dat", "w") do |f|
-				f.write(consumer_key: 			 @consumer_key,
-								consumer_secret: 		 @consumer_secret,
-								access_token:				 @access_token,
-								access_token_secret: @access_secret)
-			end
+			File.open("keys.dat", "w") { |f|  f.write(@config) }
 		end
 
 		def read_config
-
+			File.open("keys.dat", "r") do |f|
+			end
 		end
 	end
 end
