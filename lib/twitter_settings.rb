@@ -50,17 +50,6 @@ module TwitterSettings
 								access_token_secret: @access_secret)
 			end
 		end
-
-
-
-
-		# @@client = Twitter::REST::Client.new do |config|
-		# 	config.consumer_key					=	"pjpFKcMYQpRKxHtlx7BOAl3VF"
-		# 	config.consumer_secret			=	"0P97amDne0PGgL1AUK0pM9caHoeS8pK8ZpLHQUJptm6V0VVmdP"
-		# 	config.access_token					=	"770927087934996480-o7yhhEBsBPi6FNDGdVKhIHBOkAgLmlb"
-		# 	config.access_token_secret	= "FsE2XlnwOorLMQp67PPdqm2behxmLS0SR5PqmKlpNrHn1"
-		# end
-
 	end
 end
 
