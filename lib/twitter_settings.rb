@@ -6,10 +6,8 @@ module TwitterSettings
 		def initialize
 			if File.exists?('keys.dat')
 				puts "settings file found, loading it"
-				# read_config
 			else
 				create_config  # handles the creation of the config file, calling all the sub-methods
-				# read_config
 			end
 		end
 
@@ -60,6 +58,6 @@ module TwitterSettings
 		end
 end
 
-
-# include TwitterSettings
-# TwitterConfig.new
+# DEBUG STUFF
+	# include TwitterSettings
+	# TwitterConfig.new

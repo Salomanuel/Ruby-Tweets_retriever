@@ -1,7 +1,7 @@
 # documentation for this gem: https://github.com/sferik/twitter
 require 					'twitter'
-require_relative 	'twitter_settings'
-include 					TwitterSettings
+require_relative 	'twitter_settings' # that's the other file
+include 					TwitterSettings    # a module in twitter_settings.rb
 
 
 class TwitterMega
@@ -15,17 +15,6 @@ class TwitterMega
 			# configuration for the gem
 		@@client = Twitter::REST::Client.new(config)
 
-
-
-		# @@client = Twitter::REST::Client.new do |config|
-		# 	config.consumer_key					=	"pjpFKcMYQpRKxHtlx7BOAl3VF"
-		# 	config.consumer_secret			=	"0P97amDne0PGgL1AUK0pM9caHoeS8pK8ZpLHQUJptm6V0VVmdP"
-		# 	config.access_token					=	"770927087934996480-o7yhhEBsBPi6FNDGdVKhIHBOkAgLmlb"
-		# 	config.access_token_secret	= "FsE2XlnwOorLMQp67PPdqm2behxmLS0SR5PqmKlpNrHn1"
-		# end
-
-
-		
 			# all the user choices are made here, it's the interface
 		menu	
 			# main method, the workhorse
@@ -36,11 +25,9 @@ class TwitterMega
 		print_results(clean_mentionings)
 	end
 
-
-
-		# all the choices are made here
+		# all the user choices are made here
 	def menu				
-			# choose user
+			# choose target user
 		puts "\nplease enter the user you are interested in (or press q to quit)"
 		puts "(blank is @esa)"
 		@user = gets.chomp
@@ -51,7 +38,7 @@ class TwitterMega
 		end
 			# choose number or results
 		puts "select how many results you want"
-		puts "please keep it low or I will get banned from the free Twitter API"
+		puts "(please keep it low or I will get banned from the free Twitter API)"
 		@results_size = gets.chomp.to_i
 		while @results_size > 50
 			puts "\ncome on, choose a smaller number please"
