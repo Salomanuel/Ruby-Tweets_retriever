@@ -38,11 +38,6 @@ module TwitterSettings
 		end
 
 		def write_config
-			# file = YAML::load_file('lib/keys.dat') || {}
-			# self.consumer_key = "a"
-			# File.open('lib/keys.dat', 'r+') do |file|
-			# 	file.write(file.to_yaml)
-			# end
 			File.open("keys.dat", "w") do |f|
 				f.write(consumer_key: 			 @consumer_key,
 								consumer_secret: 		 @consumer_secret,
